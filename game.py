@@ -51,3 +51,27 @@ def main_game():
             if event.type == pygame.USEREVENT + 1:
                 novo_obstaculo = Obstaculo(velocidade_obstaculo)
                 obstaculos.add(novo_obstaculo)
+
+def mostrar_game_over(tempo_decorrido):
+    # 'game over' na tela
+    texto_game_over = font.render('GAME OVER', True, WHITE)
+    # texto mostrando o tempo o jogador ficou vivo
+    texto_score = font.render(f'Você ficou vivo {tempo_decorrido:.2f} segundos', True, WHITE)
+    
+    # posição do texto 'GAME OVER' na tela
+    game_over_rect = texto_game_over.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
+    # posição do texto do score na tela
+    score_rect = texto_score.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 10))
+    
+    # tela com a cor preta
+    window.fill(BLACK)
+    # 'game over' na tela
+    window.blit(texto_game_over, game_over_rect)
+    # score na tela
+    window.blit(texto_score, score_rect)
+    # Atualiza 
+    pygame.display.flip()
+    # 5 segundos antes de voltar ao menu
+    pygame.time.wait(5000)
+    # mostrar o menu
+    mostrar_menu()
