@@ -42,3 +42,13 @@ def update(self, keys):
             if self.rect.bottom < HEIGHT:
             # Move para baixo
                 self.rect.y += self.speed
+
+# Classe Obstaculo 
+class Obstaculo(pygame.sprite.Sprite):
+    #parâmetro 'speed' define a velocidade do obstáculo
+    def __init__(self, speed):
+        super().__init__()  #inicialização correta
+        self.image = pygame.transform.scale(cone_image, (50, 50))  # imagem do obstáculo
+        # 'x' é largura da tela (começando fora dela), e 'y' uma posição aleatória 
+        self.rect = self.image.get_rect(x=WIDTH, y=random.randint(50, HEIGHT - 50))
+        self.speed = speed  # velocidade do obstáculo
