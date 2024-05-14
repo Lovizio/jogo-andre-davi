@@ -31,6 +31,21 @@ def mostrar_menu():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if botao_start_rect.collidepoint(pygame.mouse.get_pos()):
+                    reset_game()  # Reinicia o jogo antes de começar
+                    main_game()
+                if fechar.collidepoint(pygame.mouse.get_pos()):
+                    pygame.quit()
+                    exit()
+
+        window.fill(BLACK)
+        window.blit(background_image, (0, 0))
+        window.blit(titulo, titulo_rect)
+        window.blit(botao_start, botao_start_rect)
+        window.blit(fecharbotao, fechar)
+        pygame.display.flip()
+        clock.tick(15)
             
 def main_game():
     global velocidade_obstaculo, timer_obstaculo, tempo_inicio, tempo_decorrido
