@@ -3,17 +3,22 @@ import pygame
 from config import *
 from classes import Carro, Obstaculo
 from imagens import background_image
+from sons import *
 
 def barra_vida(current_health):
     pygame.draw.rect(window, GREEN, (10, 10, 200 * (current_health / 5), 20))
 
 def reset_game():
     global velocidade_obstaculo, timer_obstaculo, tempo_inicio, tempo_decorrido
+    som_jogo.stop()
+    som_jogo.play()
     velocidade_obstaculo = 5
     timer_obstaculo = 2000  # 2000 milissegundos = 2 segundos
     tempo_inicio = pygame.time.get_ticks()
     tempo_decorrido = tempo_inicio
     pygame.time.set_timer(pygame.USEREVENT + 1, timer_obstaculo)
+
+
 
 
 def mostrar_menu():
@@ -47,6 +52,9 @@ def mostrar_menu():
         pygame.display.flip()
         clock.tick(15)
 
+
+
+
 def mostrar_game_over(tempo_decorrido):
     # 'game over' na tela
     texto_game_over = font.render('GAME OVER', True, WHITE)
@@ -71,7 +79,6 @@ def mostrar_game_over(tempo_decorrido):
     # mostrar o menu
     mostrar_menu()
 
-            
 def main_game():
     global velocidade_obstaculo, timer_obstaculo, tempo_inicio, tempo_decorrido
     reset_game()
@@ -120,4 +127,4 @@ def main_game():
         clock.tick(FPS)
     pygame.quit()
     exit()
-
+mostrar_menu()  # Inicializa com o menu principal
