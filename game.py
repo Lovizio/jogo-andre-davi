@@ -77,19 +77,19 @@ def main_game():
     reset_game()
     carro = Carro()
     obstaculos = pygame.sprite.Group()
-    pontos = 5  # inicializa vidas
+    pontos = 5  # Inicializa as vidas
 
     running = True
-    ultimo_aumento = 0  
+    ultimo_aumento = 0  # Controle de quando a velocidade foi aumentada pela última vez
 
     while running:
         current_time = pygame.time.get_ticks()
         elapsed_time = (current_time - tempo_inicio) / 1000
 
-        # aumenta velocidade dos obstáculos cada 10 segundos
-        if elapsed_time - ultimo_aumento >= 5: 
+        # Aumenta a velocidade dos obstáculos a cada 10 segundos, apenas uma vez por período
+        if elapsed_time - ultimo_aumento >= 5:  # Verifica se já passaram 10 segundos desde o último aumento
             velocidade_obstaculo += 1
-            ultimo_aumento = elapsed_time  # atualiza tempo do último aumento
+            ultimo_aumento = elapsed_time  # Atualiza o tempo do último aumento
 
         keys = pygame.key.get_pressed()
         for event in pygame.event.get():
@@ -103,5 +103,21 @@ def main_game():
             pontos -= 1
             if pontos <= 0:
                 mostrar_game_over(elapsed_time)
-                return  # sai da função após mostrar a tela de 'game over'
+                return  # Sai da função após mostrar a tela de Game Over
+
+        carro.update(keys)
+        obstaculos.update()
+
+        window.blit(background_image, (0, 0))
+        window.blit(carro.image, carro.rect)
+        obstaculos.draw(window)
+        barra_vida(pontos)
+
+        timer_text = timer_font.render(f"Tempo: {elapsed_time:.2f} s", True, WHITE)
+        window.blit(timer_text, (10, 50))
+
+        pygame.display.flip()
+        clock.tick(FPS)
+    pygame.quit()
+    exit()
 
