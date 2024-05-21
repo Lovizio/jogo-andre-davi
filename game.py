@@ -22,7 +22,7 @@ def reset_game():
 
 
 def mostrar_menu():
-    titulo = font.render('Jogo de Corrida com Obstáculos', True, WHITE)
+    titulo = font.render('Aventura na Estrada', True, WHITE)
     botao_start = font.render('Iniciar', True, WHITE)
     fecharbotao = font.render('Sair', True, WHITE)
 
